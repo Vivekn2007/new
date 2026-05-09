@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body class="bg-[#BFC9D1]">
+    <%- include('navbar') %>
+        <form action="/default" method="post">
+            <div class="data flex justify-center items-center mt-10 " id="batch">
+                <div
+                    class="box  border-[#25343F] border-5 w-[80vw]   flex justify-center items-center not-md:w-[95vw] ">
+                    <div class="innerbox ">
+                        <p class="font-serif text-3xl text-center my-2  not-md:text-2xl">Field to update</p>
+                        <div
+                            class="searchby flex flex-wrap w-[70vw] justify-between my-3 not-md:w-[90vw] not-md:flex not-md:text-center">
+
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">To</p>
+                                <input type="radio" value="0" id="r1">
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">Fee</p>
+                                <input type="radio" value="1" id="r1">
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">From Date</p>
+                                <input type="radio" value="2" id="r1">
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">To Date</p>
+                                <input type="radio" value="3" id="r1">
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">Institute</p>
+                                <input type="radio" value="4" id="r1">
+                            </div>
+
+                        </div>
+
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="b1">
+                            <p class="font-serif text-3xl not-md:text-2xl">To -</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl" name="to" >
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="b1">
+                            <p class="font-serif text-3xl not-md:text-2xl">Fee -</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl" name="fee">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="b1">
+                            <p class="font-serif text-3xl not-md:text-2xl">From Date-</p>
+                            <input type="date" class=" up border-2 border-[#25343F] not-md:text-2xl" name="fromDate">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="b1">
+                            <p class="font-serif text-3xl not-md:text-2xl">To Date-</p>
+                            <input type="date" class=" up border-2 border-[#25343F] not-md:text-2xl" name="toDate">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="b1">
+                            <p class="font-serif text-3xl not-md:text-2xl">Institute-</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl" name="Institute">
+                        </div>
+                        <div class="but flex justify-center items-center mt-8 not-md:mt-10">
+                            <input type="button" value="Show" id="Serch"
+                                class="w-[8vw] h-[5vh]  border-[#111F35] border-2 rounded-2xl text-3xl font-serif text-white bg-[#111F35] not-md:w-[20vw] not-md:h-[5vh] not-md:text-2xl">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="but flex justify-center items-center mt-8 not-md:mt-10">
+                <input type="submit" value="Update" id="del"
+                    class="w-[10vw] h-[8vh]  border-[#111F35] border-2 rounded-2xl text-3xl font-serif text-white bg-[#111F35] not-md:w-[20vw] not-md:h-[5vh] not-md:text-2xl">
+            </div>
+        </form>
+        <script src="default.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link href="/input.css" rel="stylesheet"> -->
+    <link href="/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+</head>
+
+<body>
+    <div class="navbar bg-[#061E29] h-[8vh] text-[#F3F4F4] flex justify-between text-2xl items-center">
+        <a class="mx-5.5">Bus_Pass</a>
+        <ul class="flex space-x-6.5 mx-5.5 not-md:hidden  ">
+            <li class="relative group ">
+                <ul>
+                    <li>Operations</li>
+                    <li>
+                        <ul
+                            class="hidden lbox group-hover:block absolute border-black border-2 bg-[#F3F4F4] text-[#061E29] text-2xl w-[10rem] text-center">
+                            <li class="border-2 border-b-black"><a href='/'>Insertion</a></li>
+                            <li class="border-2 border-b-black"><a href="/delete">Deletion</a></li>
+                            <li class="border-2 border-b-black"><a href="/update">Updation</a></li>
+                            <li class="border-2 border-b-black"><a href="/default">Default</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="relative group ">
+                <ul>
+                    <li>Data</li>
+                    <li>
+                        <ul
+                            class="hidden lbox group-hover:block absolute border-black border-2 bg-[#F3F4F4] text-[#061E29] text-2xl w-[10rem] text-center">
+                            <li class="border-2 border-b-black"><a href="/tabular">Tabular</a></li>
+                            <li class="border-2 border-b-black"><a href="/image-view">Image</a></li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="relative group ">
+                <ul>
+                    <li>Download</li>
+                    <li>
+                        <ul
+                            class="hidden lbox group-hover:block absolute border-black border-2 bg-[#F3F4F4] text-[#061E29] text-2xl w-[10rem] text-center">
+                            <li class="border-2 border-b-black"><a href="/csv">CSV</a></li>
+                            <li class="border-2 border-b-black"><a href="/pdf">PDF</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="relative group ">
+                <ul>
+                    <li><i class="fa-solid fa-user"></i></li>
+                    <li>
+                        <ul
+                            class="hidden lbox group-hover:block absolute right-0 border-black border-2 bg-[#F3F4F4] text-[#061E29] text-2xl w-[10rem] text-center">
+                            <li class="border-2 border-b-black"><a href="/logout">Logout</a></li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <a class="md:hidden mx-5.5" id="mlist" onclick="slide()"><i class="fa-solid fa-list"></i></a>
+
+    </div>
+    <div class=" md:hidden bg-[#5F9598] w-[100vw] h-[100vh] text-center text-2xl flex justify-center animate-slideleft hidden" id="sidebar">
+        <ul class="pb-4 w-[80vw] " >
+            <li class="mt-4 border-2 border-white">
+                <ul>
+                    <li class="border-b-2 border-white" onclick="drop(1)" >Operations</li>
+                    <li>
+                        <ul class="text-[1.4rem] hidden " id="hdremove" >
+                            <li  class="border-b-2 border-white"><a href='/'>Insertion</a></li>
+                            <li  class="border-b-2 border-white"><a href="/delete">Deletion</a></li>
+                            <li  class="border-b-2 border-white"><a href="/update">Updation</a></li>
+                            <li  class="border-b-2 border-white"><a href="/default">Default</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="mt-4 border-2 border-white">
+                <ul>
+                    <li class="border-b-2 border-white"  onclick="drop(2)">Data</li>
+                    <li>
+                        <ul  class="text-[1.4rem] hidden" id="hdremove">
+                            <li class="border-b-2 border-white"><a href="/tabular">Tabular</a></li>
+                            <li class="border-b-2 border-white"><a href="/image-view">Image</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="mt-4 border-2 border-white " >
+                <ul>
+                    <li class="border-b-2 border-white"  onclick="drop(3)">Download</li>
+                    <li>
+                        <ul class="text-[1.4rem] hidden"  id="hdremove">
+                            <li class="border-b-2 border-white"><a href="/csv">CSV</a></li>
+                            <li class="border-b-2 border-white"><a href="/pdf">PDF</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="mt-4 border-2 border-white"><a href="/logout">Logout</a></li>
+
+        </ul>
+    </div>
+    
+    <script src="nav.js"></script>
+</body>
+
+</html>  

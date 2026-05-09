@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+
+<body class="flex justify-center items-center min-h-[100vh] bg-[#061E29] ">
+    <form action="/login" method="post">
+
+
+        <div class="box1 border-2 border-black w-[35vw] h-[40vh] rounded-2xl bg-white not-md:w-[90vw] not-md:h-[39vh]">
+            <div class="box2">
+                <h1 class="text-4xl text-center font-sans my-5">Login</h1>
+                <div class="box3 flex justify-center items-center  ">
+                    <div class="box4 space-y-3 text-lg ">
+                        <div class="Email flex w-[30vw] justify-between not-md:w-[85vw]  ">
+                            <p>Email -</p>
+                            <input type="email" class="border-2 border-black rounded-2xl" name="email">
+                        </div>
+                        <div class="pass flex w-[30vw] justify-between not-md:w-[85vw]">
+                            <p>Password -</p>
+                            <input type="password" class="border-2 border-black rounded-2xl" name="password" >
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="but flex justify-center items-center mt-7">
+                    <a href="/signup" class="text-xl text-blue-800 hover:underline">Create a new account</a>
+                </div>
+                <div class="but flex justify-center items-center mt-7">
+                    <input type="submit" value="Login" class="not-md:w-[20vw] w-[8vw]  h-[5vh] rounded-2xl border-2 border-black bg-[#061E29] text-white">
+                </div>
+                
+            </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updation</title>
+</head>
+
+<body class="bg-[#BFC9D1]">
+    <%- include('navbar') %>
+        <h1 class="text-8xl text-center mt-5.5 font-serif not-md:text-5xl">Updation</h1>
+        <form action="/update" method="post">
+            
+            <div class="data flex justify-center items-center mt-10">
+                <div
+                    class="box  border-[#25343F] border-5 w-[80vw] h-[20vh]  flex justify-center items-center not-md:w-[95vw] not-md:h-[30vh]">
+                    <div class="innerbox ">
+                        <div
+                            class="searchby flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center">
+                            <p class="font-serif text-3xl  not-md:text-2xl">Search by-</p>
+
+                            <select class="border-2 border-[#25343F] w-[15vw] text-2xl not-md:text-2xl not-md:w-[80vw]">
+                                <option value="0">Name</option>
+                                <option value="1">Parent</option>
+                                <option value="2">Class</option>
+                                <option value="3">From</option>
+                            </select>
+                        </div>
+                        <div class="name flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl  not-md:text-2xl">Name -</p>
+                            <input type="text" class="border-2 border-[#25343F] not-md:text-2xl " name="name">
+                        </div>
+                        <div class="parent flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">Father/Mother's Name -</p>
+                            <input type="text" class="border-2 border-[#25343F]  not-md:text-2xl " name="parent">
+                        </div>
+                        <div class="class flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">Class -</p>
+                            <input type="text" class="border-2 border-[#25343F] not-md:text-2xl" name="class">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">From -</p>
+                            <input type="text" class="border-2 border-[#25343F] not-md:text-2xl" name="from">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="but flex justify-center items-center mt-8 not-md:mt-10">
+                <input type="submit" value="Search" id="sear"
+                    class="w-[10vw] h-[8vh]  border-[#111F35] border-2 rounded-2xl text-3xl font-serif text-white bg-[#111F35] not-md:w-[20vw] not-md:h-[5vh] not-md:text-2xl">
+            </div>
+            <div class="tab flex justify-center mt-5 ">
+                <table class="border-2 text-sm">
+                    <thead>
+                        <tr>
+                            <th class="border-2 w-6 not-md:w-5"><input type="checkbox" value="${id}"></th>
+                            <th class="border-2 w-8 not-md:w-4">id</th>
+                            <th class="border-2 w-70 not-md:w-15">Name</th>
+                            <th class="border-2 w-70 not-md:w-15">Parent's Name</th>
+                            <th class="border-2 w-20 not-md:w-1">Class</th>
+                            <th class="border-2 w-70 not-md:w-15">From</th>
+                            <th class="border-2 w-70 not-md:w-15">To</th>
+                            <th class="border-2 w-30 not-md:w-1">Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="data flex justify-center items-center mt-10">
+                <div
+                    class="box  border-[#25343F] border-5 w-[80vw]   flex justify-center items-center not-md:w-[95vw] ">
+                    <div class="innerbox ">
+                        <p class="font-serif text-3xl text-center my-2  not-md:text-2xl">Field to update</p>
+                        <div
+                            class="searchby flex flex-wrap w-[70vw] justify-between my-3 not-md:w-[90vw] not-md:flex not-md:text-center">
+                            
+ 
+                            <div class="sel1 flex items-center border-1  border-gray-900 ">
+                                <p class="mr-2 text-2xl ">Name</p>
+                                <input type="radio" value="0" >
+                            </div>
+                            <div class="sel2  flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">Parent</p>
+                                <input type="radio" value="1" >
+                            </div>
+                            <div class="sel3 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">Class</p>
+                                <input type="radio" value="2">
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">From</p>
+                                <input type="radio" value="3" >
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">Photo</p>
+                                <input type="radio" value="4" >
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">To</p>
+                                <input type="radio" value="5" >
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">Fee</p>
+                                <input type="radio" value="6" >
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">From Date</p>
+                                <input type="radio" value="7" >
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">To Date</p>
+                                <input type="radio" value="8" >
+                            </div>
+                            <div class="sel4 flex items-center border-1 border-gray-900 px-1">
+                                <p class="mr-2 text-2xl">Institute</p>
+                                <input type="radio" value="9" >
+                            </div>
+                            
+                        </div>
+                        <div class="name flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl  not-md:text-2xl">Name -</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl " id="name">
+                        </div>
+                        <div class="parent flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">Father/Mother's Name -</p>
+                            <input type="text" class=" up border-2 border-[#25343F]  not-md:text-2xl " id="parent" >
+                        </div>
+                        <div class="class flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">Class -</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl" id="class">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">From -</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl" id="from">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">Photo -</p>
+                            <input type="file" class=" up border-2 border-[#25343F] not-md:text-2xl not-md:w-[50vw]" id="img">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">To -</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl" id="to">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">Fee -</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl" id="fee">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">From Date-</p>
+                            <input type="date" class=" up border-2 border-[#25343F] not-md:text-2xl" id="fromDate">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">To Date-</p>
+                            <input type="date" class=" up border-2 border-[#25343F] not-md:text-2xl" id="toDate">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center hidden not-md:hidden"
+                            id="inputs">
+                            <p class="font-serif text-3xl not-md:text-2xl">Institute -</p>
+                            <input type="text" class=" up border-2 border-[#25343F] not-md:text-2xl" id="Institute">
+                        </div>
+                        <div class="but flex justify-center items-center mt-8 not-md:mt-10">
+                            <input type="button" value="Show" id="Ser"
+                                class="w-[8vw] h-[5vh]  border-[#111F35] border-2 rounded-2xl text-3xl font-serif text-white bg-[#111F35] not-md:w-[20vw] not-md:h-[5vh] not-md:text-2xl">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="but flex justify-center items-center mt-8 not-md:mt-10">
+                <input type="submit" value="Update" id="del"
+                    class="w-[10vw] h-[8vh]  border-[#111F35] border-2 rounded-2xl text-3xl font-serif text-white bg-[#111F35] not-md:w-[20vw] not-md:h-[5vh] not-md:text-2xl">
+            </div>
+
+        </form>
+        <script src="updation.js"></script>
+</body>
+
+</html>

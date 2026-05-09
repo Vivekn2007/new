@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertion</title>
+</head>
+
+<body class="bg-[#BFC9D1]">
+    <%- include('navbar')%>
+        <h1 class="text-8xl text-center mt-5.5 font-serif not-md:text-5xl">Insertion</h1>
+        <form action="/insert" method="POST" enctype="multipart/form-data">
+            <div class="data flex justify-center items-center mt-10">
+                <div class="box  border-[#25343F] border-5 w-[80vw] h-[40vh]  flex justify-center items-center not-md:w-[95vw] not-md:h-[50vh]">
+                    <div class="innerbox ">
+                        <div class="name flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center">
+                            <p class="font-serif text-3xl  not-md:text-2xl">Name -</p>
+                            <input type="text" class="border-2 border-[#25343F] not-md:text-2xl "  name="name">
+                        </div>
+                        <div class="parent flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center">
+                            <p class="font-serif text-3xl not-md:text-2xl">Father/Mother's Name -</p>
+                            <input type="text" class="border-2 border-[#25343F]  not-md:text-2xl " name="parent">
+                        </div>
+                        <div class="class flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center">
+                            <p class="font-serif text-3xl not-md:text-2xl">Class -</p>
+                            <input type="text" class="border-2 border-[#25343F] not-md:text-2xl" name="class">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center" >
+                            <p class="font-serif text-3xl not-md:text-2xl">From -</p>
+                            <input type="text" class="border-2 border-[#25343F] not-md:text-2xl" name="from">
+                        </div>
+                        <div class="add flex w-[60vw] justify-between my-3 not-md:w-[90vw] not-md:block not-md:text-center" >
+                            <p class="font-serif text-3xl not-md:text-2xl">Image -</p>
+                            <input type="file" class="border-2 border-[#25343F] not-md:text-2xl not-md:w-[50vw]" name="photo" >
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="but flex justify-center items-center mt-20 not-md:mt-10">
+                <input type="submit" value="next" class="w-[15vw] h-[10vh]  border-[#111F35] border-2 rounded-2xl text-5xl font-serif text-white bg-[#111F35] not-md:w-[20vw] not-md:h-[5vh] not-md:text-2xl"> 
+            </div>
+            
+        </form>
+</body>
+
+</html>
