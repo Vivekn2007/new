@@ -29,7 +29,11 @@ function requireLogin(req, res, next) {
   }
   next();
 }
-const upload = multer({ dest: "uploads/" });
+// Replace this: 
+// const upload = multer({ dest: "uploads/" });
+
+// With this:
+const upload = multer({ storage: multer.memoryStorage() });
 
 const publicPath = path.join(__dirname, './public');
 const viewsPath = path.join(__dirname, './views');
@@ -466,7 +470,7 @@ app.post('/insert',requireLogin, upload.single("photo"), async (req, res) => {
     } catch {
         id1 = 0;
     }
-    const buffer = file.readFileSync(req.file.path); // returns Buffer
+    const buffer = file.readFileSync(req.file.buffer); // returns Buffer
     const base64 = buffer.toString("base64");        // convert Buffer → Base64
 
     const dataInsert = {
