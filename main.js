@@ -62,7 +62,7 @@ app.get('/signup',(req,res)=>{
 })
 app.get('/image-view',requireLogin, async (req, res) => {
     try {
-        const data = await Studdata.findOne({ 'email': email });
+        const data = await Studdata.findOne({ 'email': req.session.user });
 
         req.session.object = data['data'];
     } catch (e) {
@@ -73,7 +73,7 @@ app.get('/image-view',requireLogin, async (req, res) => {
 
 app.get("/pdf",requireLogin, async (req, res) => {
     // Example student data
-    const data = await Studdata.findOne({ 'email': email });
+    const data = await Studdata.findOne({ 'email': req.session.user });
     
     
     // Build HTML manually
@@ -208,13 +208,13 @@ app.get('/tabular',requireLogin, async (req, res) => {
     res.render('tableView');
 })
 app.get('/table-view',requireLogin, async (req, res) => {
-    let data = await Studdata.findOne({ "email": email });
+    let data = await Studdata.findOne({ "email": req.session.user });
     res.json({ 'data': data['data'] });
 })
 
 app.get('/csv',requireLogin, async (req, res) => {
     try {
-        let data = await Studdata.find({'email':email}).lean();
+        let data = await Studdata.find({'email':req.session.user}).lean();
         data = await data[0]["data"];
         console.log(data);
         const fields = ["name", "parent", "class", "from", "to", "fee"];
@@ -262,7 +262,7 @@ app.post('/delete-item',requireLogin, async (req, res) => {
     console.log(req.body);
     for (let i of req.body.array) {
         await Studdata.updateOne(
-            { "email": email },
+            { "email": req.session.user },
             { $pull: { "data": { "id": parseInt(i) } } }
         )
     }
@@ -277,7 +277,7 @@ app.post('/update-item',requireLogin, async (req, res) => {
         for (let i of id) {
             console.log(i);
             await Studdata.updateOne(
-                { 'email':email,'data.id': parseInt(i) },
+                { 'email':req.session.user,'data.id': parseInt(i) },
                 {
                     $set: Object.fromEntries(
                         Object.entries(change).map(([key, val]) => [`data.$.${key}`, val])
@@ -356,7 +356,7 @@ app.post('/default',requireLogin,async (req,res)=>{
         }
     }
     await Studdata.updateOne(
-        { "email": email },
+        { "email": req.session.user },
         {
             $set: obj
         }
@@ -381,7 +381,7 @@ app.post('/update',requireLogin, async (req, res) => {
 
         if (parameter != "") {
             let data = await Studdata.aggregate([
-                { $match: { "email": email } },
+                { $match: { "email": req.session.user } },
                 {
                     $project: {
                         "data": {
@@ -425,7 +425,7 @@ app.post('/delete',requireLogin, async (req, res) => {
 
         if (parameter != "") {
             let data = await Studdata.aggregate([
-                { $match: { "email": email } },
+                { $match: { "email": req.session.user } },
                 {
                     $project: {
                         "data": {
@@ -458,7 +458,7 @@ app.post('/insert', requireLogin, upload.single("photo"), async (req, res) => {
         }
 
         // 1. Get the current user's default data
-        const result = await Studdata.findOne({ "email": email });
+        const result = await Studdata.findOne({ "email": req.session.user });
         if (!result) {
             return res.status(404).send("User not found");
         }
@@ -492,7 +492,7 @@ app.post('/insert', requireLogin, upload.single("photo"), async (req, res) => {
 
         // 4. Update the database
         await Studdata.updateOne(
-            { "email": email },
+            { "email": req.session.user },
             { $push: { "data": dataInsert } }
         );
 
