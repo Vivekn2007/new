@@ -451,61 +451,59 @@ app.post('/delete',requireLogin, async (req, res) => {
     res.redirect('/delete');
 })
 
-app.post('/insert',requireLogin, upload.single("photo"), async (req, res) => {
-
-    if (!req.file) {
-        return res.status(400).send("No file uploaded");
-    }
-    console.log(req.file.path); // safe now
-
-    const result = await Studdata.findOne({ "email": email });
-    const to = result["to"];
-    const fee = result["fee"];
-    const fromDate = result["fromDate"];
-    const toDate = result["toDate"];
-    const Institute = result['Institute'];
-    const size = result.data.length;
-    let id1;
+app.post('/insert', requireLogin, upload.single("photo"), async (req, res) => {
     try {
-        const lastRecord = result.data[size - 1];
-        if (lastRecord && lastRecord.id !== undefined) {
-            id1 = lastRecord.id + 1;
-        } else {
-            id1 = 0;
+        if (!req.file) {
+            return res.status(400).send("No file uploaded");
         }
-    } catch {
-        id1 = 0;
-    }
-    const buffer = req.file.buffer; // returns Buffer
-    const base64 = buffer.toString("base64");        // convert Buffer → Base64
 
-    const dataInsert = {
-        "id": id1,
-        "name": req.body.name,
-        "parent": req.body.parent,
-        "class": req.body.class,
-        "from": req.body.from,
-        "img": {
-            data: base64,
-            contentType: req.file.mimetype
-        },
-        "to": to,
-        "fee" : fee,
-        "fromDate" : fromDate,
-        "toDate" : toDate,
-        "Institute" : Institute
-    }
-    await Studdata.updateOne(
-        { "email": email },
-        {
-            $push: {
-                "data": dataInsert
-            }
+        // 1. Get the current user's default data
+        const result = await Studdata.findOne({ "email": email });
+        if (!result) {
+            return res.status(404).send("User not found");
         }
-    )
-    
-    res.redirect('/');
-})
+
+        // 2. Handle the ID generation
+        let id1 = 0;
+        if (result.data && result.data.length > 0) {
+            const lastRecord = result.data[result.data.length - 1];
+            id1 = (lastRecord.id !== undefined) ? lastRecord.id + 1 : 0;
+        }
+
+        // 3. FIX: req.file.buffer IS the data. toString("base64") converts it.
+        const base64 = req.file.buffer.toString("base64");
+
+        const dataInsert = {
+            "id": id1,
+            "name": req.body.name,
+            "parent": req.body.parent,
+            "class": req.body.class,
+            "from": req.body.from,
+            "img": {
+                data: base64,
+                contentType: req.file.mimetype
+            },
+            "to": result["to"],
+            "fee": result["fee"],
+            "fromDate": result["fromDate"],
+            "toDate": result["toDate"],
+            "Institute": result['Institute']
+        };
+
+        // 4. Update the database
+        await Studdata.updateOne(
+            { "email": email },
+            { $push: { "data": dataInsert } }
+        );
+
+        // Success - Redirect home
+        res.redirect('/');
+
+    } catch (e) {
+        console.error("Insertion Error:", e);
+        res.status(500).send("Internal Server Error: Could not save student data.");
+    }
+});
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
     res.redirect("/login");
