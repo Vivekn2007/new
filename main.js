@@ -8,7 +8,9 @@ const { exec } = require('child_process');
 const { Parser } = require('json2csv');
 const multer = require("multer");
 const file = require('fs');
-const puppeteer = require("puppeteer");
+
+const chromium = require('@sparticuz/chromium');
+const puppeteer = require('puppeteer-core');
 
 
 const MongoStore = require("connect-mongo");
@@ -185,7 +187,11 @@ html += `</div>
 </html>`;
 
 // Puppeteer
-const browser = await puppeteer.launch({ headless: true });
+const browser = await puppeteer.launch({
+    args: chromium.args,
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
+});
 const page = await browser.newPage();
 await page.setContent(html, { waitUntil: "networkidle0" });
 const pdfBuffer = await page.pdf({ format: "A4" });
@@ -309,7 +315,7 @@ app.post('/signup', async (req, res) => {
         }
 
         // if no user found, create new one
-        await Studdata.insertOne(data);
+        await Studdata.create(data);
         return res.status(201).redirect('/login');
 
     } catch (e) {
@@ -470,7 +476,7 @@ app.post('/insert',requireLogin, upload.single("photo"), async (req, res) => {
     } catch {
         id1 = 0;
     }
-    const buffer = file.readFileSync(req.file.buffer); // returns Buffer
+    const buffer = req.file.buffer; // returns Buffer
     const base64 = buffer.toString("base64");        // convert Buffer → Base64
 
     const dataInsert = {
@@ -497,7 +503,7 @@ app.post('/insert',requireLogin, upload.single("photo"), async (req, res) => {
             }
         }
     )
-    file.unlinkSync(req.file.path);
+    
     res.redirect('/');
 })
 app.get("/logout", (req, res) => {

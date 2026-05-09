@@ -12,6 +12,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@sparticuz/chromium": "^148.0.0",
     "@tailwindcss/cli": "^4.2.4",
     "child_process": "^1.0.2",
     "connect-mongo": "^4.6.0",
@@ -27,6 +28,7 @@
     "nodemon": "^3.1.14",
     "path": "^0.12.7",
     "puppeteer": "^24.43.0",
+    "puppeteer-core": "^24.43.0",
     "tailwindcss": "^4.2.4"
   }
 }
