@@ -23,7 +23,7 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI,
-    // Add these to prevent session-related timeouts
+    // This allows the session store to wait for the DB to be ready
     mongoOptions: { 
         serverSelectionTimeoutMS: 5000,
         connectTimeoutMS: 10000 
