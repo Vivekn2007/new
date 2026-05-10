@@ -8,11 +8,13 @@ const { exec } = require('child_process');
 const { Parser } = require('json2csv');
 const multer = require("multer");
 const file = require('fs');
-
+const connectDB = require('./src/db');
 const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
 
-
+const publicPath = path.join(__dirname, './public');
+const viewsPath = path.join(__dirname, './views');
+app.use(express.static(publicPath));
 const MongoStore = require("connect-mongo");
 app.use(session({
   secret: process.env.SESSION_SECRET || "your-secret-key",
@@ -36,14 +38,12 @@ function requireLogin(req, res, next) {
 // With this:
 const upload = multer({ storage: multer.memoryStorage() });
 
-const publicPath = path.join(__dirname, './public');
-const viewsPath = path.join(__dirname, './views');
 
 let email = "";
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
-app.use(express.static(publicPath));
+
 app.set('views', viewsPath)
 app.set('view engine', 'ejs');
 
@@ -72,8 +72,10 @@ app.get('/image-view',requireLogin, async (req, res) => {
 
 app.get("/pdf",requireLogin, async (req, res) => {
     // Example student data
+    await connectDB();
     const data = await Studdata.findOne({ 'email': req.session.user });
-    
+    const fontPath = path.join(__dirname, 'public', 'fonts', 'NotoSansDevanagari-Regular.ttf');
+    const fontBase64 = fs.readFileSync(fontPath).toString('base64');
     
     // Build HTML manually
     let html = `
@@ -89,8 +91,17 @@ app.get("/pdf",requireLogin, async (req, res) => {
             padding: 0;
             margin: 0;
         }
-        .body{  font-family: 'Noto Sans Devanagari', sans-serif;
+        @font-face {
+            font-family: 'Noto Sans Devanagari';
+            src: url(data:font/ttf;charset=utf-8;base64,${fontBase64}) format('truetype');
         }
+
+        
+        body { 
+            font-family: 'Noto Sans Devanagari', sans-serif; 
+            background: white;
+        }
+        
         .main {
             display: flex;
             flex-wrap: wrap;
@@ -193,8 +204,11 @@ const browser = await puppeteer.launch({
     headless: chromium.headless,
 });
 const page = await browser.newPage();
-await page.setContent(html, { waitUntil: "networkidle0" });
-const pdfBuffer = await page.pdf({ format: "A4" });
+await page.setContent(html, { waitUntil: "networkidle2" });
+const pdfBuffer = await page.pdf({ 
+        format: "A4",
+        printBackground: true // Ensures colors/borders show up
+    });
 await browser.close();
 
 res.setHeader("Content-Type", "application/pdf");
