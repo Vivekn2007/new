@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI)
+.then(() => console.log('connected successfully'))
+.catch((e) => console.log(e.message));
 
 const data = new mongoose.Schema({
     email: {

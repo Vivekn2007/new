@@ -8,7 +8,7 @@ const { exec } = require('child_process');
 const { Parser } = require('json2csv');
 const multer = require("multer");
 const file = require('fs');
-const connectDB = require('./src/db');
+
 const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
 
@@ -16,7 +16,7 @@ const publicPath = path.join(__dirname, './public');
 const viewsPath = path.join(__dirname, './views');
 app.use(express.static(publicPath));
 const MongoStore = require("connect-mongo");
-connectDB();
+
 app.use(session({
   secret: process.env.SESSION_SECRET || "your-secret-key",
   resave: false,
@@ -341,7 +341,7 @@ app.post('/signup', async (req, res) => {
 
 app.post('/login', async (req,res)=>{
     try {
-        await connectDB(); // Ensure the connection is attempted
+
         const data = await Studdata.findOne({ 'email': req.body.email });
         if (data) {
             if (data.password == req.body.password) {
