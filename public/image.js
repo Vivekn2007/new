@@ -12,7 +12,7 @@ async function Api() {
 function InsertPass(data,contentType,name,parent,clas,from,to,fee,fromDate,toDate,Institute) {
     const src = `data:${contentType};base64,${data}`;
     const ele = document.createElement('div');
-    ele.innerHTML = `<div class="box1 h-[45vh] w-[40vw] border-2 border-black mx-[5vw] mt-5 not-md:h-[40vh] not-md:w-[90vw] not-md:text-base">
+    ele.innerHTML = `<div class="box1 h-[45vh] w-[40vw] border-2 border-black mx-[5vw] mt-5 md:h-[45vh] not-md:w-[90vw] not-md:text-base">
             <p class="text-center font-bold text-xl my-2 not-md:text-lg">${Institute}</p>
             <div class="box3 flex justify-center items-center">
                 <div class="box2 flex justify-between w-[30vw] not-md:w-[80vw]">

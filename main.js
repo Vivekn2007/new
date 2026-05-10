@@ -76,7 +76,7 @@ app.get('/image-view',requireLogin, async (req, res) => {
 
 app.get("/pdf",requireLogin, async (req, res) => {
     // Example student data
-    await connectDB();
+
     const data = await Studdata.findOne({ 'email': req.session.user });
     const fontPath = path.join(__dirname, 'public', 'fonts', 'NotoSansDevanagari-Regular.ttf');
     const fontBase64 = file.readFileSync(fontPath).toString('base64');
