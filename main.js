@@ -341,7 +341,7 @@ app.post('/signup', async (req, res) => {
 
 app.post('/login', async (req,res)=>{
     try {
-
+        await connectDB(); // Ensure the connection is attempted
         const data = await Studdata.findOne({ 'email': req.body.email });
         if (data) {
             if (data.password == req.body.password) {
