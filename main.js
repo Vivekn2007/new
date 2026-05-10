@@ -8,7 +8,7 @@ const { exec } = require('child_process');
 const { Parser } = require('json2csv');
 const multer = require("multer");
 const file = require('fs');
-
+const { SpeedInsights } = "@vercel/speed-insights"
 const chromium = require('@sparticuz/chromium');
 const puppeteer = require('puppeteer-core');
 
