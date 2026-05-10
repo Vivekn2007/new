@@ -10,7 +10,6 @@ async function api() {
         for (let dat in obj) {
 
             let ele = obj[dat];
-            console.log(ele);
             table(count, ele["name"], ele["parent"], ele["class"], ele["from"], ele["to"], ele["fee"]);
             count = count+1;
         }

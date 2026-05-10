@@ -14,7 +14,6 @@ const puppeteer = require('puppeteer-core');
 
 
 const MongoStore = require("connect-mongo");
-console.log("DB URI Check:", process.env.MONGODB_URI); // Should NOT be undefined
 app.use(session({
   secret: process.env.SESSION_SECRET || "your-secret-key",
   resave: false,
@@ -84,8 +83,6 @@ app.get("/pdf",requireLogin, async (req, res) => {
     <head>
     <meta charset="UTF-8">
     <title>Bus Pass</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
-    <link href="/output.css" rel="stylesheet">
     <style>
         *{
             padding: 0;
@@ -216,13 +213,12 @@ app.get('/csv',requireLogin, async (req, res) => {
     try {
         let data = await Studdata.find({'email':req.session.user}).lean();
         data = await data[0]["data"];
-        console.log(data);
         const fields = ["name", "parent", "class", "from", "to", "fee"];
         const parser = new Parser({ fields });
         const csv = parser.parse(data);
-        const filePath = 'output.csv';
-        file.writeFileSync(filePath, csv);
-        res.download('output.csv');
+        res.setHeader('Content-Type','text/csv');
+        res.setHeader('Content-Disposition','attachment;filename=student');
+        return res.status(200).send(csv);
     }
     catch (e) {
         console.log(e);
@@ -259,7 +255,6 @@ app.get('/default',(req,res)=>{
 })
 
 app.post('/delete-item',requireLogin, async (req, res) => {
-    console.log(req.body);
     for (let i of req.body.array) {
         await Studdata.updateOne(
             { "email": req.session.user },
@@ -270,12 +265,10 @@ app.post('/delete-item',requireLogin, async (req, res) => {
 app.post('/update-item',requireLogin, async (req, res) => {
 
     try {
-        console.log(req.body);
         const id = req.body['id'];
         const change = req.body;
         delete req.body['id'];
         for (let i of id) {
-            console.log(i);
             await Studdata.updateOne(
                 { 'email':req.session.user,'data.id': parseInt(i) },
                 {
@@ -367,7 +360,6 @@ app.post('/update',requireLogin, async (req, res) => {
     req.session.object = {};
     let parameter = "";
     for (let i in req.body) {
-        console.log(req.body[i]);
         if (req.body[i] != "") {
             parameter = i;
         }

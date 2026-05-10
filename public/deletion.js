@@ -26,7 +26,6 @@ function selection() {
     let checkb = document.querySelectorAll('input[type="checkbox"]');
     if (checkb[0].checked) {
         checkb.forEach((box) => {
-            console.log('tr');
             box.checked = true;
         })
     } else {
@@ -44,7 +43,6 @@ async function api() {
     let data = await resp.json();
     try {
         let obj = data['par'][0]["data"];
-        console.log(data['par'][0]);
         for (let dat in obj) {
 
             let ele = obj[dat];
@@ -74,7 +72,6 @@ function table(id, name, parent, clas, from, to, fee) {
 }
 function showInput() {
     let key = selectbox.value;
-    console.log(inp[parseInt(key)].name);
     divs.forEach((div) => {
         div.classList.add('hidden');
         div.classList.add('not-md:hidden')

@@ -5,7 +5,6 @@ async function Api() {
     const res = await fetch('/session-storage-image')
     const data = await res.json();
     for(let i in data){
-        console.log(data[i]);
         InsertPass(data[i]['img']['data'],data[i]['img']['contentType'],data[i]['name'],data[i]['parent'],data[i]['class'],data[i]['from'],data[i]['to'],data[i]['fee'],data[i]['fromDate'],data[i]['toDate'],data[i]['Institute']);
     }
 }
