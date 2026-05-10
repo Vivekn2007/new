@@ -83,10 +83,13 @@ app.get("/pdf",requireLogin, async (req, res) => {
     <head>
     <meta charset="UTF-8">
     <title>Bus Pass</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari&display=swap" rel="stylesheet">
     <style>
         *{
             padding: 0;
             margin: 0;
+        }
+        .body{  font-family: 'Noto Sans Devanagari', sans-serif;
         }
         .main {
             display: flex;
@@ -217,7 +220,7 @@ app.get('/csv',requireLogin, async (req, res) => {
         const parser = new Parser({ fields });
         const csv = parser.parse(data);
         res.setHeader('Content-Type','text/csv');
-        res.setHeader('Content-Disposition','attachment;filename=student');
+        res.setHeader('Content-Disposition','attachment;filename=student.csv');
         return res.status(200).send(csv);
     }
     catch (e) {
