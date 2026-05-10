@@ -8,14 +8,6 @@
   ],
   "routes": [
     {
-      "src": "/output.css",
-      "dest": "/public/output.css"
-    },
-    {
-      "src": "/fonts/(.*)",
-      "dest": "/public/fonts/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "main.js"
     }

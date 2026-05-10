@@ -4,9 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-  "start": "node main.js",
-  "build": "npx @tailwindcss/cli -i ./src/input.css -o ./public/output.css"
-},
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tail": "npx @tailwindcss/cli -i ./src/input.css -o ./public/output.css --watch"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
