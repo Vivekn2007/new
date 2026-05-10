@@ -1,17 +1,29 @@
 const mongoose = require('mongoose');
 
+// Use a global variable to store the connection. 
+// This prevents multiple connections during Vercel hot-reloads.
+let isConnected = false; 
+
 const connectDB = async () => {
-    // If we are already connected, don't connect again
-    if (mongoose.connection.readyState >= 1) {
+    mongoose.set('strictQuery', true);
+
+    if (isConnected) {
+        console.log('=> Using existing database connection');
         return;
     }
 
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
-        console.log('MongoDB Connected Successfully');
+        const db = await mongoose.connect(process.env.MONGODB_URI, {
+            // These options prevent the "Buffering Timeout" error
+            serverSelectionTimeoutMS: 5000, 
+            bufferCommands: false, 
+        });
+
+        isConnected = db.connections[0].readyState;
+        console.log('=> New database connection established');
     } catch (error) {
-        console.error('MongoDB Connection Error:', error.message);
-        // Don't exit the process on Vercel; let it retry on the next request
+        console.error('=> Database connection error:', error);
+        throw error;
     }
 };
 

@@ -16,16 +16,20 @@ const publicPath = path.join(__dirname, './public');
 const viewsPath = path.join(__dirname, './views');
 app.use(express.static(publicPath));
 const MongoStore = require("connect-mongo");
+connectDB();
 app.use(session({
   secret: process.env.SESSION_SECRET || "your-secret-key",
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI,   // must be set in Render/your env
-    ttl: 14 * 24 * 60 * 60               // session lifetime (14 days)
+    mongoUrl: process.env.MONGODB_URI,
+    // Add these to prevent session-related timeouts
+    mongoOptions: { 
+        serverSelectionTimeoutMS: 5000,
+        connectTimeoutMS: 10000 
+    }
   })
 }));
-
 function requireLogin(req, res, next) {
   if (!req.session.user) {
     return res.redirect('/login');  // send back to login
@@ -75,7 +79,7 @@ app.get("/pdf",requireLogin, async (req, res) => {
     await connectDB();
     const data = await Studdata.findOne({ 'email': req.session.user });
     const fontPath = path.join(__dirname, 'public', 'fonts', 'NotoSansDevanagari-Regular.ttf');
-    const fontBase64 = fs.readFileSync(fontPath).toString('base64');
+    const fontBase64 = file.readFileSync(fontPath).toString('base64');
     
     // Build HTML manually
     let html = `
